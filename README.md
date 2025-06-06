@@ -44,8 +44,7 @@ byte B = 200; // уровень синего
 led1.RGB_write(R, G, B); // обновляем цвет (Получился приятный серо-синий цвет)
  }
 ```
-https://github.com/user-attachments/assets/7dd76b83-8f55-492f-bd38-e4e0fc46ec16
-
+https://github.com/user-attachments/assets/5af5a9b9-bac8-4c38-822f-5034306c652e
 ### Примечание
 Библиотека находится в разработке!
 Все недостатки будут постепенно исправленны.
