@@ -15,20 +15,20 @@ class LED{
     
     void HUE_write(byte color){ // пространство RGB
       _HUEcolor = color;
-      if(_color < 85){  // если значение цвета меньше 85 то, установить такие цвета
-        _Rclr = 85 - _color;
-        _Gclr = _color;
+      if(_HUEcolor < 85){  // если значение цвета меньше 85 то, установить такие цвета
+        _Rclr = 85 - _HUEcolor;
+        _Gclr = _HUEcolor;
         _Bclr = 0;
       }
-      else if(_color < 170){  // если значение цвета меньше 170 то, установить такие цвета
+      else if(_HUEcolor < 170){  // если значение цвета меньше 170 то, установить такие цвета
         _Rclr = 0;
-        _Gclr = 170 - _color;
-        _Bclr = _color - 85;
+        _Gclr = 170 - _HUEcolor;
+        _Bclr = _HUEcolor - 85;
       }
       else{
-        _Rclr = _color - 170; // иначе, установить такие цвета
+        _Rclr = _HUEcolor - 170; // иначе, установить такие цвета
         _Gclr = 0;
-        _Bclr = 255 - _color;
+        _Bclr = 255 - _HUEcolor;
       }
       analogWrite(_Rpin, _Rclr);
       analogWrite(_Gpin, _Gclr);
