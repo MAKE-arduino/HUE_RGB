@@ -1,5 +1,5 @@
-#ifndef testLib_h
-#define testLib_h
+#ifndef M_RGB_h
+#define M_RGB_h
 #include <Arduino.h>
 
 class LED{ 
