@@ -1,56 +1,25 @@
-#ifndef M_RGB_h
-#define M_RGB_h
+#pragma once
 #include <Arduino.h>
 
-class LED{ 
-  public:
-    LED(byte Rpin, byte Gpin, byte Bpin){
-    _Rpin = Rpin;
-    _Gpin = Gpin;
-    _Bpin = Bpin;
-    pinMode(_Rpin, OUTPUT);
-    pinMode(_Rpin, OUTPUT);
-    pinMode(_Rpin, OUTPUT);
-        }  
-    
-    void HUE_write(byte color){ // пространство RGB
-      _HUEcolor = color;
-      if(_HUEcolor < 85){  // если значение цвета меньше 85 то, установить такие цвета
-        _Rclr = 85 - _HUEcolor;
-        _Gclr = _HUEcolor;
-        _Bclr = 0;
-      }
-      else if(_HUEcolor < 170){  // если значение цвета меньше 170 то, установить такие цвета
-        _Rclr = 0;
-        _Gclr = 170 - _HUEcolor;
-        _Bclr = _HUEcolor - 85;
-      }
-      else{
-        _Rclr = _HUEcolor - 170; // иначе, установить такие цвета
-        _Gclr = 0;
-        _Bclr = 255 - _HUEcolor;
-      }
-      analogWrite(_Rpin, _Rclr);
-      analogWrite(_Gpin, _Gclr);
-      analogWrite(_Bpin, _Bclr);
+class LED {
+public:
+
+  LED(uint8_t Rpin, uint8_t Gpin, uint8_t Bpin)
+    : _Rpin(Rpin), _Gpin(Gpin), _Bpin(Bpin) {}
+
+  void setHUE(byte color) {                                    // пространство RGB
+    if (color < 85) setRGB(85 - color, color, 0);              // если значение цвета меньше 85 то, установить такие цвета
+    else if (color < 170) setRGB(0, 170 - color, color - 85);  // если значение цвета меньше 170 то, установить такие цвета
+    else setRGB(color - 170, 0, 255 - color);                  // иначе такие цвета
   }
 
-    void RGB_write(byte Rclr1, byte Gclr1, byte Bclr1){ // пространство RGB
-      _Rclr1 = Rclr1; 
-      _Gclr1 = Gclr1;
-      _Bclr1 = Bclr1;
-      analogWrite(_Rpin, _Rclr1); // уровень красново
-      analogWrite(_Gpin, _Gclr1); // уровень зелёного
-      analogWrite(_Bpin, _Bclr1); // уровень синего
-    }
+  void setRGB(uint8_t Rclr, uint8_t Gclr, uint8_t Bclr) {  // обновить цвет
+    analogWrite(_Rpin, Rclr);                              // уровень красново
+    analogWrite(_Gpin, Gclr);                              // уровень зелёного
+    analogWrite(_Bpin, Bclr);                              // уровень синего
+  }
 
-  private: 
-    // приватные переменные:
-    byte _Rpin, _Gpin, _Bpin; // пины светодиода 
-    byte _HUEcolor; // переменная значения цвета на вход HUE (0 - 255)
-    byte _Rclr1, _Gclr1, _Bclr1; // переменная цвета RGB
-    byte _Rclr, _Gclr, _Bclr; // переменная значения цвета на выходе по цветам (HUE)
+private:
+  // приватные переменные:
+  uint8_t _Rpin, _Gpin, _Bpin;  // пины светодиода
 };
-
-#endif
-
